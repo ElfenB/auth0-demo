@@ -31,7 +31,7 @@ export function Navigation() {
 
       {isAuthenticated && (
         <Paper sx={{ alignItems: "center", background: "black", display: "flex", pr: 1 }}>
-          <Button onClick={() => logout()}>Logout</Button>
+          <Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Logout</Button>
           <Avatar alt="user" src={user?.picture} sx={{ height: "1.5rem", width: "1.5rem" }} />
         </Paper>
       )}
