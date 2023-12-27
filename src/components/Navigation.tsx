@@ -1,5 +1,5 @@
-import { Button, Container, Tab, Tabs } from "@mui/material";
-import { useCallback } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Avatar, Button, Container, Paper, Tab, Tabs } from "@mui/material";
 import type { SyntheticEvent } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -8,13 +8,11 @@ export function Navigation() {
 
   const navigate = useNavigate();
 
+  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
+
   const handleChange = (_event: SyntheticEvent, newValue: number) => {
     navigate(newValue);
   };
-
-  const handleLogin = useCallback(() => {
-    console.log("implement me");
-  }, []);
 
   return (
     <Container
@@ -26,11 +24,17 @@ export function Navigation() {
     >
       <Tabs onChange={handleChange} value={pathname}>
         <Tab label="Home" value="/" />
-        <Tab label="About" value="/about" />
-        <Tab label="Contact" value="/contact" />
+        <Tab label="Profile" value="/profile" />
       </Tabs>
 
-      <Button onClick={handleLogin}>Login</Button>
+      {!isAuthenticated && <Button onClick={() => loginWithRedirect()}>Login</Button>}
+
+      {isAuthenticated && (
+        <Paper sx={{ alignItems: "center", background: "black", display: "flex", pr: 1 }}>
+          <Button onClick={() => logout()}>Logout</Button>
+          <Avatar alt="user" src={user?.picture} sx={{ height: "1.5rem", width: "1.5rem" }} />
+        </Paper>
+      )}
     </Container>
   );
 }
