@@ -1,3 +1,4 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import { Container, createTheme, CssBaseline, ThemeProvider, useMediaQuery } from "@mui/material";
 import { useMemo } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -6,6 +7,8 @@ import { Home } from "./views/Home";
 import { Profile } from "./views/Profile";
 
 export function App() {
+  const { isAuthenticated } = useAuth0();
+
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const theme = useMemo(
@@ -29,7 +32,7 @@ export function App() {
           <Routes>
             <Route element={<Home />} path="/"></Route>
 
-            <Route element={<Profile />} path="/profile"></Route>
+            {isAuthenticated && <Route element={<Profile />} path="/profile"></Route>}
 
             {/* Error route */}
             <Route element={<h1 style={{ color: "red" }}>404 - page not found</h1>} path="*" />
