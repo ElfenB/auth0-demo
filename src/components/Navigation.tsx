@@ -24,13 +24,13 @@ export function Navigation() {
     >
       <Tabs onChange={handleChange} value={pathname}>
         <Tab label="Home" value="/" />
-        <Tab label="Profile" value="/profile" />
+        <Tab disabled={!isAuthenticated} label="Profile" value="/profile" />
       </Tabs>
 
       {!isAuthenticated && <Button onClick={() => loginWithRedirect()}>Login</Button>}
 
       {isAuthenticated && (
-        <Paper sx={{ alignItems: "center", background: "black", display: "flex", pr: 1 }}>
+        <Paper sx={{ alignItems: "center", display: "flex", pr: 1 }}>
           <Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Logout</Button>
           <Avatar alt="user" src={user?.picture} sx={{ height: "1.5rem", width: "1.5rem" }} />
         </Paper>

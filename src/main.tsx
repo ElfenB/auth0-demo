@@ -2,10 +2,12 @@
 import { Auth0Provider } from "@auth0/auth0-react";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import { App } from "./App.tsx";
 
+import { App } from "./App.tsx";
 import { authConfig } from "./authConfig.ts";
+
 import "./index.css";
+
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";

@@ -1,25 +1,41 @@
-import { Container } from "@mui/material";
+import { Container, createTheme, CssBaseline, ThemeProvider, useMediaQuery } from "@mui/material";
+import { useMemo } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Navigation } from "./components/Navigation";
 import { Home } from "./views/Home";
 import { Profile } from "./views/Profile";
-import "./App.css";
 
 export function App() {
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: prefersDarkMode ? "dark" : "light",
+        },
+      }),
+    [prefersDarkMode],
+  );
+
   return (
-    <BrowserRouter>
-      <Navigation />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
 
-      <Container>
-        <Routes>
-          <Route element={<Home />} path="/"></Route>
+      <BrowserRouter>
+        <Navigation />
 
-          <Route element={<Profile />} path="/profile"></Route>
+        <Container>
+          <Routes>
+            <Route element={<Home />} path="/"></Route>
 
-          {/* Error route */}
-          <Route element={<h1 style={{ color: "red" }}>404 - page not found</h1>} path="*" />
-        </Routes>
-      </Container>
-    </BrowserRouter>
+            <Route element={<Profile />} path="/profile"></Route>
+
+            {/* Error route */}
+            <Route element={<h1 style={{ color: "red" }}>404 - page not found</h1>} path="*" />
+          </Routes>
+        </Container>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
