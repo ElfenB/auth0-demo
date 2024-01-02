@@ -1,3 +1,5 @@
 #root {
   height: 100svh;
+  overflow: auto;
+  scrollbar-gutter: stable both-edges;
 }
