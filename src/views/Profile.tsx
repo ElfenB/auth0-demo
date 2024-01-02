@@ -1,22 +1,14 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import type { Theme } from "@mui/material";
-import { Box, CircularProgress, Table, TableBody, TableCell, TableRow } from "@mui/material";
+import { Box, Table, TableBody, TableCell, TableRow } from "@mui/material";
 import { blueGrey } from "@mui/material/colors";
+import { LoadingSpinner } from "../components/LoadingSpinner";
 
 export function Profile() {
   const { isAuthenticated, isLoading, user } = useAuth0();
 
   if (isLoading) {
-    return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <CircularProgress sx={{ mt: "30%" }} />
-      </Box>
-    );
+    return <LoadingSpinner />;
   }
 
   if (!isAuthenticated || !user) {
