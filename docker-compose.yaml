@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  frontend:
+    container_name: frontend
+    build: .
+    restart: always
+    ports:
+      - 4000:80
