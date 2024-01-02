@@ -1,5 +1,5 @@
 {
-  "name": "auth0-poc",
+  "name": "auth0-demo",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -19,6 +19,7 @@
     "@mui/material": "^5.15.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-markdown": "^9.0.1",
     "react-router-dom": "^6.21.1"
   },
   "devDependencies": {

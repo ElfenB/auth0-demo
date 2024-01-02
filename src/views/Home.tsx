@@ -1,9 +1,15 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Divider } from "@mui/material";
+import { Libraries } from "../components/Libraries";
+import { Readme } from "../components/Readme";
 
 export function Home() {
   return (
-    <Box sx={{ pt: 2 }}>
-      <Typography variant="body1">Welcome to my demo app for implementing Auth0 in a React SPA.</Typography>
+    <Box>
+      <Readme />
+
+      <Divider sx={{ my: 3 }} variant="inset" />
+
+      <Libraries />
     </Box>
   );
 }

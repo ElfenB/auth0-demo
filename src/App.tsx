@@ -2,6 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Container, createTheme, CssBaseline, ThemeProvider, useMediaQuery } from "@mui/material";
 import { useMemo } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Footer } from "./components/Footer";
 import { LoadingSpinner } from "./components/LoadingSpinner";
 import { Navigation } from "./components/Navigation";
 import { Home } from "./views/Home";
@@ -22,7 +23,8 @@ export function App() {
     [prefersDarkMode],
   );
 
-  const isEnvDefined = import.meta.env.VITE_AUTH0_CLIENT_ID && import.meta.env.VITE_AUTH0_DOMAIN;
+  const isEnvDefined =
+    import.meta.env.VITE_AUTH0_CLIENT_ID && import.meta.env.VITE_AUTH0_DOMAIN && import.meta.env.VITE_GITHUB_URL;
 
   if (!isEnvDefined) {
     return (
@@ -52,6 +54,8 @@ export function App() {
             <Route element={<h1 style={{ color: "red" }}>404 - page not found</h1>} path="*" />
           </Routes>
         </Container>
+
+        <Footer />
       </BrowserRouter>
     </ThemeProvider>
   );

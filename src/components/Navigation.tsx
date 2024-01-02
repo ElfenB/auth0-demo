@@ -1,19 +1,10 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import { Avatar, Box, Button, Container, Tab, Tabs } from "@mui/material";
-import type { SyntheticEvent } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import { Box, Container } from "@mui/material";
+import { A } from "./A";
+import { LoginButton } from "./LoginButton";
+import { NavTabs } from "./NavTabs";
 
 export function Navigation() {
-  const { pathname } = useLocation();
-
-  const navigate = useNavigate();
-
-  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
-
-  const handleChange = (_event: SyntheticEvent, newValue: number) => {
-    navigate(newValue);
-  };
-
   return (
     <Box sx={{ borderBottom: "1px solid rgba(0, 0, 0, 0.12)" }}>
       <Container
@@ -23,19 +14,13 @@ export function Navigation() {
           justifyContent: "space-between",
         }}
       >
-        <Tabs onChange={handleChange} value={pathname}>
-          <Tab label="Home" value="/" />
-          {isAuthenticated && <Tab label="Profile" value="/profile" />}
-        </Tabs>
+        <NavTabs />
 
-        {!isAuthenticated && <Button onClick={() => loginWithRedirect()}>Login</Button>}
+        <A href={import.meta.env.VITE_GITHUB_URL}>
+          <GitHubIcon />
+        </A>
 
-        {isAuthenticated && (
-          <Box sx={{ alignItems: "center", display: "flex", pr: 1 }}>
-            <Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Logout</Button>
-            <Avatar alt="user" src={user?.picture} sx={{ height: "1.5rem", width: "1.5rem" }} />
-          </Box>
-        )}
+        <LoginButton />
       </Container>
     </Box>
   );
