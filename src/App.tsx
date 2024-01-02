@@ -22,6 +22,16 @@ export function App() {
     [prefersDarkMode],
   );
 
+  const isEnvDefined = import.meta.env.VITE_AUTH0_CLIENT_ID && import.meta.env.VITE_AUTH0_DOMAIN;
+
+  if (!isEnvDefined) {
+    return (
+      <h1 style={{ color: "red", fontFamily: "sans-serif", textAlign: "center" }}>
+        Error: Please check environment variables.
+      </h1>
+    );
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
