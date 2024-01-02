@@ -13,6 +13,7 @@ FROM nginx:stable-alpine as production-stage
 
 COPY --from=build-stage /app/dist /www
 COPY --from=build-stage /app/robots.txt /www
+COPY --from=build-stage /app/README.md /www
 COPY --from=build-stage /app/nginx.conf /etc/nginx
 
 EXPOSE 80
