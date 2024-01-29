@@ -13,10 +13,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Create .env file
+        run: |
+          echo "VITE_AUTH0_CLIENT_ID=${{ secrets.VITE_AUTH0_CLIENT_ID }}" > .env
+          echo "VITE_AUTH0_DOMAIN=${{ secrets.VITE_AUTH0_DOMAIN }}" >> .env
+          echo "VITE_GITHUB_URL=${{ secrets.VITE_GITHUB_URL }}" >> .env
+
       - name: Deploy
-        env:
-          VITE_AUTH0_CLIENT_ID: ${{ secrets.VITE_AUTH0_CLIENT_ID }}
-          VITE_AUTH0_DOMAIN: ${{ secrets.VITE_AUTH0_DOMAIN }}
-          VITE_GITHUB_URL: ${{ secrets.VITE_GITHUB_URL }}
         run: |
           docker compose up -d --build
