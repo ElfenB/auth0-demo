@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+env:
+  VITE_AUTH0_CLIENT_ID: ${{ secrets.VITE_AUTH0_CLIENT_ID }}
+  VITE_AUTH0_DOMAIN: ${{ secrets.VITE_AUTH0_DOMAIN }}
+  VITE_GITHUB_URL: ${{ secrets.VITE_GITHUB_URL }}
+
 jobs:
   deploy:
     runs-on: self-hosted
